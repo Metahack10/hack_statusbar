@@ -1,0 +1,20 @@
+#Funcion para Setear Target en la 2da status Bar
+
+function settarget(){
+    ip_address=$1
+    machine_name=$2
+    filename='/home/kali/.config/panels/target'
+     echo $ip_address $machine_name|tee -a $filename >/dev/null
+     echo "se adiciono el taget $machine_name con exito"
+}
+
+
+#Funcion para eliminar un Target de la 2da status Bar
+
+function deltarget(){
+    machine_name=$1
+    filename='/home/kali/.config/panels/target'
+    sed -i "/$machine_name/d" "$filename"
+    echo "Se elimino el target $machine_name con exito"
+}
+
