@@ -1,10 +1,15 @@
 #!/bin/bash
 
-ip_address=$(cat /home/kali/.config/panels/target | awk '{print $1}')
-machine_name=$(cat /home/kali/.config/panels/target | awk '{print $2}')
- 
-if [ $ip_address ] && [ $machine_name ]; then
-    echo " $ip_address - $machine_name    "
+filename=/home/kali/.config/panels/target
+separador=" - "
+while IFS= read -r linea
+do
+    ip_address=$(echo "$linea"|awk '{print $1}')
+    machine_name=$(echo "$linea"|awk '{print $2}')
+    target+=$ip_address$separador$machine_name"|"
+done < $filename
+if [ -n "$target" ]; then
+    echo " $target    "
 else
     echo "# No target    "
 fi
