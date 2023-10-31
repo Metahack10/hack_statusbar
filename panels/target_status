@@ -1,0 +1,15 @@
+#!/bin/bash
+
+filename=/home/kali/.config/panels/target
+separador=" - "
+while IFS= read -r linea
+do
+    ip_address=$(echo "$linea"|awk '{print $1}')
+    machine_name=$(echo "$linea"|awk '{print $2}')
+    target+="💻️  "$ip_address$separador$machine_name" | "
+done < $filename
+if [ -n "$target" ]; then
+    echo " $target    "
+else
+    echo "🤖️ No target    "
+fi
